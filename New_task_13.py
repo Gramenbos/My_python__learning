@@ -3,8 +3,7 @@
 def sum_numbers(number):
     if number < 10:
         return number
-    else:
-        return number % 10 + sum_numbers(number // 10)
+    return number % 10 + sum_numbers(number // 10)
 
 
 num = int(input('Enter any number: '))

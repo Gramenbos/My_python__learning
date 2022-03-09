@@ -18,4 +18,20 @@ def selection_sort(arr):
     return new_arr
 
 
+def sum_numbers(number):
+    if number < 10:
+        return number
+    return number % 10 + sum_numbers(number // 10)
+
+
+def sum_numbers_in_arr(arr):
+    if len(arr) <= 1:
+        return int(arr[0])
+    return int(arr[-1]) + int(sum_numbers_in_arr(arr[:-1]))
+
+
 print(selection_sort([5, 3, 6, 2, 10, -10, 123]))
+num = int(input('Enter any number: '))
+array = str(num)
+print(f'The sum of the numbers (in array) is {sum_numbers_in_arr(array)}.')
+print(f'The sum of the numbers (in number) is {sum_numbers(num)}.')
