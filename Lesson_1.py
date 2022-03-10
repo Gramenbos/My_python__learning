@@ -35,3 +35,19 @@ num = int(input('Enter any number: '))
 array = str(num)
 print(f'The sum of the numbers (in array) is {sum_numbers_in_arr(array)}.')
 print(f'The sum of the numbers (in number) is {sum_numbers(num)}.')
+
+# Задача про хэш-таблицы
+voted = {}
+
+
+def check_voter(name):
+    if voted.get(name):
+        print('Kick them out!')
+    else:
+        voted[name] = True
+        print('Let them vote!')
+
+
+check_voter('Tom')
+check_voter('Mike')
+check_voter('Mike')
