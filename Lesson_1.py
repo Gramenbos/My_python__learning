@@ -25,9 +25,9 @@ def sum_numbers(number):
 
 
 def sum_numbers_in_arr(arr):
-    if len(arr) <= 1:
-        return int(arr[0])
-    return int(arr[-1]) + int(sum_numbers_in_arr(arr[:-1]))
+    if len(arr) < 1:
+        return 0
+    return int(arr[0]) + int(sum_numbers_in_arr(arr[1:]))
 
 
 print(selection_sort([5, 3, 6, 2, 10, -10, 123]))
