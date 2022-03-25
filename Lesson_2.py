@@ -82,9 +82,50 @@
 # которая определяет имеют ли указанные клетки один цвет или нет.
 # Если они покрашены в один цвет, то выведите слово «YES»,
 # а если в разные цвета — то «NO».
+#
+# def chess(x_1, y_1, x_2, y_2):
+#     return not (x_1 + y_1 + x_2 + y_2) % 2
+#
+#
+# print(chess(2, 1, 1, 2))
 
-def chess(x_1, y_1, x_2, y_2):
-    return not (x_1 + y_1 + x_2 + y_2) % 2
+# Напишите программу, которая считывает названия двух основных цветов для смешивания.
+# Если пользователь вводит что-нибудь помимо названий «красный», «синий» или «желтый»,
+# то программа должна вывести сообщение об ошибке.
+# В противном случае программа должна вывести название вторичного цвета, который получится в результате
+
+def check_colours(one_col, sec_col):
+    if one_col in base_colours and sec_col in base_colours:
+        mix_col = base_colours[one_col] + base_colours[sec_col]
+        return mixed_colours[mix_col]
+    else:
+        return 'Input error.'
 
 
-print(chess(2, 1, 1, 3))
+base_colours = \
+    {
+        'red': 'r',
+        'blue': 'b',
+        'yellow': 'y'
+    }
+mixed_colours = \
+    {
+        'rb': 'violet',
+        'br': 'violet',
+        'ry': 'orange',
+        'yr': 'orange',
+        'by': 'green',
+        'yb': 'green'
+    }
+
+current_colours = input('Enter two colours: ')
+first_colour, second_colour = current_colours.split()
+print(check_colours(first_colour, second_colour))
+
+# На вход программе подается натуральное число n.
+# Напишите программу, которая для каждого из чисел от 0 до n (включительно)
+# выводит фразу: «Квадрат числа [число] равен [число]» (без кавычек).
+#
+# n = 5
+# for i in range(n + 1):
+#     print('Квадрат числа {} равен {}'.format(i, i ** 2))
