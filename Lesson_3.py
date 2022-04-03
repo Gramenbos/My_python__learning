@@ -54,6 +54,13 @@ def fill_dict(any_list):
     return result_dic
 
 
+def split_many(x):
+    tmp_many = x.split(' + ')
+    result_many = []
+    for i in tmp_many:
+
+    return result_many
+
 data_1 = open('text_for_lesson_3.txt', 'r')
 first_line = data_1.readline()
 second_line = data_1.readline()
