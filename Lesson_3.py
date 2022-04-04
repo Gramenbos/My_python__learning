@@ -54,14 +54,9 @@ def fill_dict(any_list):
     return result_dic
 
 
-def split_many(x):
-    tmp_many = x.split(' + ')
-    result_many = []
-    for i in tmp_many:
-
-    return result_many
-
 data_1 = open('text_for_lesson_3.txt', 'r')
+# write_many(5)
+# write_many(4)
 first_line = data_1.readline()
 second_line = data_1.readline()
 print(first_line)
@@ -70,8 +65,8 @@ first_temp = first_line.split(' + ')
 second_temp = second_line.split(' + ')
 print(first_temp)
 print(second_temp)
-first_dic = fill_dict(first_line)
-print(first_dic)
+# first_dic = fill_dict(first_line)
+# print(first_dic)
 
 # В файле находится N натуральных чисел, записанных через пробел.
 # Среди чисел не хватает одного, чтобы выполнялось условие
