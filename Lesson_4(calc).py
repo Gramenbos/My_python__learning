@@ -1,17 +1,8 @@
-# Напишите программу, удаляющую из текста все слова содержащие "абв".
-
-# any_str = 'Если б мишабвки были пчелабвами 123.'
-# del_str = 'абв'
-# tmp = any_str.split()
-# res = list(filter(lambda item: del_str not in item, tmp))
-# res = ' '.join(res)
-# print(res)
-
-# Написать программу вычисления арифметического выражения заданного строкой.
-# Используются операции +,-,/,*. приоритет операций стандартный.
+# Написать программу вычисления арифметического выражения, заданного строкой.
+# Используются операции +,-,/,*. Приоритет операций стандартный.
 # Пример: 2+2 => 4; 1+2*3 => 7; 1-2*3 => -5;
-# Дополнительно: Добавить возможность использования скобок,
-# меняющих приоритет операций. Пример: 1+2*3 => 7; (1+2)*3 => 9;
+# Дополнительно: Добавить возможность использования скобок, меняющих приоритет операций.
+# Пример: 1+2*3 => 7; (1+2)*3 => 9;
 
 def calc(a, b, sign):
     if sign == '+':
@@ -21,7 +12,7 @@ def calc(a, b, sign):
     elif sign == '*':
         return a * b
     elif sign == '/' and b != 0:
-        return int(a / b)
+        return a / b
     elif sign == '//' and b != 0:
         return a // b
     elif sign == '%' and b != 0:
@@ -30,7 +21,7 @@ def calc(a, b, sign):
         print('Input error')
 
 
-def if_znak(s):
+def if_sign(s):
     return s in ['+', '-', '*', '/', '(', ')']
 
 
@@ -48,32 +39,35 @@ def split_numbers(x):
                 if tmp_num != '':
                     add_num.append(int(tmp_num))
                 tmp_num = ''
-            if if_znak(x[i]):
+            if if_sign(x[i]):
                 add_num.append(x[i])
+            else:
+                print('Input error.')
+                exit()
     return add_num
 
 
-def operation(x, a, b):
-    for i in range(len(x) - 1):
-        if x[i] == a or x[i] == b:
-            tmp = calc(x[i - 1], x[i + 1], x[i])
-            x[i - 1] = tmp
-            x.pop(i + 1)
-            x.pop(i)
-            return x
-    # return x
+def math_operation(num_list, action_1, action_2):
+    for i in range(len(num_list) - 1):
+        if num_list[i] == action_1 or num_list[i] == action_2:
+            tmp_res = calc(num_list[i - 1], num_list[i + 1], num_list[i])
+            num_list[i - 1] = tmp_res
+            num_list.pop(i + 1)
+            num_list.pop(i)
+            return num_list
 
 
-def calc_all(numb_list):
-    while '*' in numb_list or '/' in numb_list:
-        numb_list = operation(numb_list, '*', '/')
-    while '+' in numb_list or '-' in numb_list:
-        numb_list = operation(numb_list, '+', '-')
-    return numb_list
+def calc_all(num_list):
+    while '*' in num_list or '/' in num_list:
+        num_list = math_operation(num_list, '*', '/')
+    while '+' in num_list or '-' in num_list:
+        num_list = math_operation(num_list, '+', '-')
+    return num_list
 
 
-def calc_parentheses(num_list):
-    if '(' in num_list and ')' in num_list:
+def open_brackets(num_list):
+    while '(' in num_list and ')' in num_list:
+        first_num = 0
         for i in range(len(num_list)):
             if num_list[i] == '(':
                 first_num = i
@@ -87,16 +81,22 @@ def calc_parentheses(num_list):
     return num_list
 
 
-def super_calc(num_list):
-    while '(' in num_list and ')' in num_list:
-        num_list = calc_parentheses(num_list)
-    num_list = calc_all(num_list)
+def super_calc(input_numbers):
+    num_list = split_numbers(input_numbers)  # Разбиваем строку с примером на список
+    num_list = open_brackets(num_list)  # Открываем скобки
+    num_list = calc_all(num_list)  # Считаем выражение
     return num_list
 
 
-numbers = '5*(5+4)+6*(4+1*(55-5))'
-work_list = split_numbers(numbers)
-# print(work_list)
-work_list = super_calc(work_list)
-# print(work_list)
-print('{} = {}'.format(numbers, *work_list))
+numbers = '5*(5+4)+6*(4+1*(11/5))-7/(9-7)'
+result = super_calc(numbers)
+print('{} = {}'.format(numbers, *result))
+
+# Напишите программу, удаляющую из текста все слова содержащие "абв".
+
+# any_str = 'Если б мишабвки были пчелабвами 123.'
+# del_str = 'абв'
+# tmp = any_str.split()
+# res = list(filter(lambda item: del_str not in item, tmp))
+# res = ' '.join(res)
+# print(res)
