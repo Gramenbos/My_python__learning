@@ -25,22 +25,23 @@ def if_sign(s):
     return s in ['+', '-', '*', '/', '(', ')']
 
 
-def split_numbers(x):
-    x.replace(' ', '')
+def split_numbers(num):
+    num = num.split()
+    num = ''.join(num)      # Эти две строки удаляют все пробелы
     add_num = []
     tmp_num = ''
-    for i in range(len(x)):
-        if x[i].isdigit():
-            tmp_num += x[i]
-            if i == len(x) - 1:
+    for i in range(len(num)):
+        if num[i].isdigit():
+            tmp_num += num[i]
+            if i == len(num) - 1:
                 add_num.append(int(tmp_num))
         else:
-            if x[i - 1].isdigit():
+            if num[i - 1].isdigit():
                 if tmp_num != '':
                     add_num.append(int(tmp_num))
                 tmp_num = ''
-            if if_sign(x[i]):
-                add_num.append(x[i])
+            if if_sign(num[i]):
+                add_num.append(num[i])
             else:
                 print('Input error.')
                 exit()
@@ -66,6 +67,9 @@ def calc_all(num_list):
 
 
 def open_brackets(num_list):
+    if num_list.count('(') != num_list.count(')'):
+        print('Input error.')
+        exit()
     while '(' in num_list and ')' in num_list:
         first_num = 0
         for i in range(len(num_list)):
@@ -88,7 +92,7 @@ def super_calc(input_numbers):
     return num_list
 
 
-numbers = '5*(5+4)+6*(4+1*(11/5))-7/(9-7)'
+numbers = '5*(5+4)+6*(4+7*(11/5))-7/(99-71)'
 result = super_calc(numbers)
 print('{} = {}'.format(numbers, *result))
 
