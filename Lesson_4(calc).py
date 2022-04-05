@@ -27,7 +27,7 @@ def if_sign(s):
 
 def split_numbers(num):
     num = num.split()
-    num = ''.join(num)      # Эти две строки удаляют все пробелы
+    num = ''.join(num)  # Эти две строки удаляют все пробелы
     add_num = []
     tmp_num = ''
     for i in range(len(num)):
@@ -70,7 +70,7 @@ def open_brackets(num_list):
     if num_list.count('(') != num_list.count(')'):
         print('Input error.')
         exit()
-    while '(' in num_list and ')' in num_list:
+    while '(' in num_list:
         first_num = 0
         for i in range(len(num_list)):
             if num_list[i] == '(':
@@ -92,7 +92,7 @@ def super_calc(input_numbers):
     return num_list
 
 
-numbers = '5*(5+4)+6*(4+7*(11/5))-7/(99-71)'
+numbers = '5*(5+4)+3*(4+7*(11/5))-7/(99-71)'
 result = super_calc(numbers)
 print('{} = {}'.format(numbers, *result))
 
