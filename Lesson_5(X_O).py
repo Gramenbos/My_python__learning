@@ -1,7 +1,7 @@
-def draw_board(board):
+def draw_board(current_board):
     print("-" * 13)
     for i in range(3):
-        print("|", board[0 + i * 3], "|", board[1 + i * 3], "|", board[2 + i * 3], "|")
+        print("|", current_board[0 + i * 3], "|", current_board[1 + i * 3], "|", current_board[2 + i * 3], "|")
         print("-" * 13)
 
 
@@ -23,37 +23,34 @@ def take_input(player_token):
             print("Некорректный ввод. Введите число от 1 до 9.")
 
 
-def check_win(board):
+def check_win(current_board):
     win_coord = ((0, 1, 2), (3, 4, 5), (6, 7, 8), (0, 3, 6), (1, 4, 7), (2, 5, 8), (0, 4, 8), (2, 4, 6))
     for each in win_coord:
-        if board[each[0]] == board[each[1]] == board[each[2]]:
-            return board[each[0]]
+        if current_board[each[0]] == current_board[each[1]] == current_board[each[2]]:
+            return current_board[each[0]]
     return False
 
 
-def main(board):
+def main(current_board):
     counter = 0
-    win = False
-    while not win:
-        draw_board(board)
-        if counter % 2 == 0:
+    while counter < 9:
+        draw_board(current_board)
+        if not counter % 2:
             take_input("X")
         else:
             take_input("O")
         counter += 1
         if counter > 4:
-            tmp = check_win(board)
-            if tmp:
-                print(tmp, "выиграл!")
-                # win = True
+            winner = check_win(current_board)
+            if winner:
+                draw_board(current_board)
+                print(winner, "выиграл!")
                 break
-        if counter == 9:
-            print("Ничья!")
-            break
-    draw_board(board)
+    if counter == 9:
+        draw_board(current_board)
+        print("Ничья!")
 
 
 print("*" * 10, " Игра Крестики-нолики для двух игроков ", "*" * 10)
 board = list(range(1, 10))
 main(board)
-input("Нажмите Enter для выхода!")
